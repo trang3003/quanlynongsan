@@ -26,8 +26,7 @@
 <body>
   
 <?php
-require './header.php';
-
+require './header_Xtimkiem.php';
 ?>
 
     <!-- Breadcrumb Section Begin -->
