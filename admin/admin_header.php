@@ -101,7 +101,7 @@ li.dropdown {
     </ul>
     <ul class="nav navbar-nav navbar-right navbar-user">
       <li class="dropdown user-dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"> ĐĂNG XUẤT</i><b class="caret"></b></a>
+      <a href="../dangxuat.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a>
       </li>
     </ul>
   </div>

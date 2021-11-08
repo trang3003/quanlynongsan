@@ -19,10 +19,10 @@
     require("../config.php");
     if(isset($_GET['search']) && !empty($_GET['search'])){
       $key =$_GET['search'];
-      $products=mysqli_query($conn,"SELECT *FROM donhang,tinhtrangdh,nguoidung,loainguoidung,chitietdonhang,sanpham WHERE `khachhang_id` LIKE '%$key%' AND tinhtrangdh.tinhtrang_id=donhang.tinhtrang_id AND nguoidung.loainguoidung_id=loainguoidung.loainguoidung_id AND chitietdonhang.donhang_id=donhang.donhang_id AND chitietdonhang.sanpham_id=sanpham.sanpham_id");
+      $products=mysqli_query($conn,"SELECT *FROM donhang,tinhtrangdh,nguoidungchitietdonhang,sanpham WHERE `khachhang_id` LIKE '%$key%' AND tinhtrangdh.tinhtrang_id=donhang.tinhtrang_id AND chitietdonhang.donhang_id=donhang.donhang_id AND chitietdonhang.sanpham_id=sanpham.sanpham_id");
     }
     else{
-      $products=mysqli_query($conn,"SELECT *FROM donhang,tinhtrangdh,nguoidung,loainguoidung,chitietdonhang,sanpham WHERE tinhtrangdh.tinhtrang_id=donhang.tinhtrang_id AND nguoidung.loainguoidung_id=loainguoidung.loainguoidung_id AND chitietdonhang.donhang_id=donhang.donhang_id AND chitietdonhang.sanpham_id=sanpham.sanpham_id");
+      $products=mysqli_query($conn,"SELECT *FROM donhang,tinhtrangdh,nguoidung,chitietdonhang,sanpham WHERE tinhtrangdh.tinhtrang_id=donhang.tinhtrang_id AND chitietdonhang.donhang_id=donhang.donhang_id AND chitietdonhang.sanpham_id=sanpham.sanpham_id");
     }
 ?>
      <div id="wrapper">
@@ -59,11 +59,10 @@
                       <tr>
                       <th> STT<i class="fa fa-sort"></i></th>
                         <th>Tên khách hàng <i class="fa fa-sort"></i></th>
-                        <th> Tên sản phẩm <i class="fa fa-sort"></i></th>
-                        <th> Số lượng sản phẩm<i class="fa fa-sort"></i></th>
                         <th> Địa chỉ <i class="fa fa-sort"></i></th>
                         <th> SĐT <i class="fa fa-sort"></i></th>
                         <th> Ghi chú <i class="fa fa-sort"></i></th>
+                        <th> Email<i class="fa fa-sort"></i></th>
                         <th> Tình trạng đơn hàng <i class="fa fa-sort"></i></th>
                         <th> Sửa <i class="fa fa-sort"></i></th>
                         <th> Xóa <i class="fa fa-sort"></i></th>
@@ -72,16 +71,17 @@
                     <tbody>
                     <?php
                     $stt=1;
-                while($row =mysqli_fetch_array($products)){
+                    $products="SELECT *FROM donhang,tinhtrangdh,nguoidung,chitietdonhang,sanpham WHERE chitietdonhang.donhang_id=donhang.donhang_id AND chitietdonhang.sanpham_id=sanpham.sanpham_id AND donhang.khachhang_id=nguoidung.nguoidung_id AND donhang.tinhtrang_id=tinhtrangdh.tinhtrang_id;";
+                    $result=$conn->query($products);
+                while($row = $result->fetch_array()){
                     ?>
                     <tr>
                     <td><?=$stt?></td>
-                    <td> <?=$row['khachhang_id']?></td>
-                    <td> <?=$row['sanpham_ten']?></td>
-                    <td><?=$row['chitietdonhang_soluong']?></td>
-                    <td> <?=$row['loainguoidung_ten']?></td>
-                    <td> <?=$row['loainguoidung_ten']?></td>
-                    <td> <?=$row['chitietdonhang_ghichu']?></td>
+                    <td> <?=$row['nguoidung_ten']?></td>
+                    <td> <?=$row['donhang_diachi']?></td>
+                    <td> <?=$row['donhang_sdt']?></td>
+                    <td> <?=$row['donhang_ghichu']?></td>
+                    <td> <?=$row['donhang_email']?></td>
                     <td> <?=$row['tinhtrang_ten']?></td>
                     <td><a href="./edit_donhang.php?donhang_id=<?=$row['donhang_id']?>">Sửa</a></td>
                     <td><a href="./delete_donhang.php?donhang_id=<?=$row['donhang_id']?>">Xóa</a></td>

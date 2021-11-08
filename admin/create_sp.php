@@ -35,10 +35,12 @@
         <?php 
      $error=false;
      if(isset($_GET['action']) && $_GET['action']=='create'){
-  
-         if(isset($_POST['sanpham_ten']) && !empty($_POST['sanpham_ten']) && isset($_POST['sanpham_anh']) && !empty($_POST['sanpham_anh']) && isset($_POST['sanpham_giaban']) && !empty($_POST['sanpham_giaban']) && isset($_POST['sanpham_soluong']) && !empty($_POST['sanpham_soluong']) && isset($_POST['loaisanpham_id']) && !empty($_POST['loaisanpham_id']) && isset($_POST['donvitinh_id']) && !empty($_POST['donvitinh_id'])  && isset($_POST['nhacungcap_id']) && !empty($_POST['nhacungcap_id']) ){
+         if(isset($_POST['sanpham_ten']) && !empty($_POST['sanpham_ten']) && isset($_FILES['sanpham_anh']) && !empty($_FILES['sanpham_anh']) && isset($_POST['sanpham_giaban']) && !empty($_POST['sanpham_giaban']) && isset($_POST['sanpham_soluong']) && !empty($_POST['sanpham_soluong']) && isset($_POST['loaisanpham_id']) && !empty($_POST['loaisanpham_id']) && isset($_POST['donvitinh_id']) && !empty($_POST['donvitinh_id'])  && isset($_POST['nhacungcap_id']) && !empty($_POST['nhacungcap_id']) ){
              require '../config.php';
-             $sql=  "INSERT INTO `sanpham` (`sanpham_ten`,`sanpham_anh`,`sanpham_giaban`,`sanpham_soluong`,`loaisanpham_id`,`nhacungcap_id`,`donvitinh_id`) VALUE ('".$_POST['sanpham_ten']."','".$_POST['sanpham_anh']."','".$_POST['sanpham_giaban']."','".$_POST['sanpham_soluong']."','".$_POST['loaisanpham_id']."','".$_POST['donvitinh_id']."','".$_POST['nhacungcap_id']."')";
+             $sanpham_anh=$_FILES['sanpham_anh']['name'];
+             $sanpham_anh_chen = "images/".$sanpham_anh;
+             $sql=  "INSERT INTO `sanpham` (`sanpham_ten`,`sanpham_anh`,`sanpham_giaban`,`sanpham_soluong`,`loaisanpham_id`,`nhacungcap_id`,`donvitinh_id`) VALUE ('".$_POST['sanpham_ten']."','$sanpham_anh_chen','".$_POST['sanpham_giaban']."','".$_POST['sanpham_soluong']."','".$_POST['loaisanpham_id']."','".$_POST['donvitinh_id']."','".$_POST['nhacungcap_id']."')";
+           move_uploaded_file($_FILES['sanpham_anh']['tmp_name'],"../images/".$sanpham_anh);
              $result= mysqli_query($conn,$sql);
              
              if(!$result){
@@ -70,7 +72,7 @@
               <div class="panel-body">
                 <div class="table-responsive">
                   <table class="table table-bordered table-hover table-striped tablesorter">
-                      <form action="./create_sp.php?action=create" method="post">
+                      <form action="./create_sp.php?action=create" method="post" enctype = "multipart/form-data">
                       <label>Nhập tên sản phẩm</label><br>
                       <input type="text" name="sanpham_ten" value=""><br>
                       <label>Nhập giá bán</label><br>
@@ -80,7 +82,7 @@
                       <label>Ảnh sản phẩm: </label><br>
                     <div class="wrap-field">
                       <div class="right-wrap-field">
-                        <input width="50px;" type="file" name="sanpham_anh" />
+                        <input width="50px;" type="file" name="sanpham_anh"/>
                       </div>
                       <br>
                     </div>

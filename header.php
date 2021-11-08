@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,12 +19,27 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./giohang.php"><i class="fa fa-shopping-bag"></i> <span></span></a></li>
+                <li><a href="./giohang.php"><i class="fa fa-shopping-bag"></i> <span><?=$soluong?></span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
-                <a href="./dangnhap.php"><i class="fa fa-user"></i> Đăng Nhập</a>
+                <div class="header__top__right__auth">
+                    <?php
+                    if(isset($_SESSION['khachhang']['nguoidung_ten'])){
+                        $ten=$_SESSION['khachhang']['nguoidung_ten'];
+                    ?>
+                        <a href="./index.php"><i class="fa fa-user"></i><?php echo $ten; ?></a>
+                    <?php
+                    }else{
+                    ?>
+                        <a href="./dangnhap.php"><i class="fa fa-user"></i>Đăng nhập</a>
+                    <?php 
+                    }
+                    ?>  
+                    
+                    <a href="./dangxuat.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a>
+                </div>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -66,10 +84,24 @@
                     <div class="col-lg-6">
                         <div class="header__top__right">
                             <div class="header__top__right__auth">
-                                <a href="./dangnhap.php"><i class="fa fa-user"></i> Đăng Nhập</a>
+                            <?php
+
+                                if(isset($_SESSION['khachhang']['nguoidung_ten'])){
+                                    $ten=$_SESSION['khachhang']['nguoidung_ten'];
+                            ?>
+                                    <a href="./index.php"><i class="fa fa-user"></i><?php echo $ten; ?></a>
+                            <?php
+                                }else{
+                            ?>
+                                    <a href="./dangnhap.php"><i class="fa fa-user"></i>Đăng nhập</a>
+                            <?php 
+                                }
+                            ?>
+                            <a href="./dangxuat.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -101,7 +133,7 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./giohang.php"><i class="fa fa-shopping-bag"></i> <span></span></a></li>
+                            <li><a href="./giohang.php"><i class="fa fa-shopping-bag"></i> <span><?=$soluong?></span></a></li>
                         </ul>
                     </div>
                 </div>

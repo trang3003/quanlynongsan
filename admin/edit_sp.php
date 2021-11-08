@@ -17,8 +17,9 @@
 </head>
 
 <body>
+  
+<?php require './admin_header.php'?>
   <div id="wrapper">
-    <?php require './admin_header.php'?>
     <div id="page-wrapper">
       <div class="row">
         <div class="col-lg-12">
@@ -31,10 +32,12 @@
         <?php
         require '../config.php';
         $error=false;
-        if(isset($_GET['action']) && $_GET['action'] == "edit"){\
-          if(isset($_POST['sanpham_id']) && !empty($_POST['sanpham_id']) &&  isset($_POST['sanpham_ten']) && !empty($_POST['sanpham_ten'])&&  isset($_POST['sanpham_giaban']) && !empty($_POST['sanpham_giaban']) && isset($_POST['sanpham_soluong']) && !empty($_POST['sanpham_soluong']) &&  isset($_POST['sanpham_anh']) && !empty($_POST['sanpham_anh']) &&  isset($_POST['loaisanpham_id']) && !empty($_POST['loaisanpham_id']) &&  isset($_POST['donvitinh_id']) && !empty($_POST['donvitinh_id']) &&  isset($_POST['nhacungcap_id']) && !empty($_POST['nhacungcap_id'])){
-           $sql="UPDATE `sanpham` SET `sanpham_ten` = '".$_POST['sanpham_ten']."', `sanpham_anh`= '".$_POST['sanpham_anh']."', `sanpham_giaban`= '".$_POST['sanpham_giaban']."', `sanpham_soluong`= '".$_POST['sanpham_soluong']."' , `loaisanpham_id`= '".$_POST['loaisanpham_id']."' , `donvitinh_id`= '".$_POST['donvitinh_id']."', `nhacungcap_id`= '".$_POST['nhacungcap_id']."'  WHERE `sanpham`.`sanpham_id`=".$_POST['sanpham_id'].";";
-          
+        if(isset($_GET['action']) && $_GET['action'] == "edit"){
+        if(isset($_POST['sanpham_id']) && !empty($_POST['sanpham_id']) &&  isset($_POST['sanpham_ten']) && !empty($_POST['sanpham_ten'])&&  isset($_POST['sanpham_giaban']) && !empty($_POST['sanpham_giaban']) && isset($_POST['sanpham_soluong']) && !empty($_POST['sanpham_soluong']) &&  isset($_POST['sanpham_anh']) && !empty($_POST['sanpham_anh']) &&  isset($_POST['loaisanpham_id']) && !empty($_POST['loaisanpham_id']) &&  isset($_POST['donvitinh_id']) && !empty($_POST['donvitinh_id']) &&  isset($_POST['nhacungcap_id']) && !empty($_POST['nhacungcap_id'])){
+          if(isset($_FILES['sanpham_anh']) && $_FILES['sanpham_anh']['name'] != "") $sanpham_anh="images/".$_FILES['sanpham_anh']['name'];
+          else { $sanpham_anh=$_POST['sanpham_anh']; }
+           $sql="UPDATE `sanpham` SET `sanpham_ten` = '".$_POST['sanpham_ten']."', `sanpham_giaban`= '".$_POST['sanpham_giaban']."', `sanpham_soluong`= '".$_POST['sanpham_soluong']."', `sanpham_anh`= '".$sanpham_anh."' , `loaisanpham_id`= '".$_POST['loaisanpham_id']."' , `donvitinh_id`= '".$_POST['donvitinh_id']."', `nhacungcap_id`= '".$_POST['nhacungcap_id']."'  WHERE `sanpham`.`sanpham_id`=".$_POST['sanpham_id'].";";
+
            $result= mysqli_query($conn,$sql);
             if(!$result){
               $error ="Không thể cập nhật sản phẩm";
@@ -49,7 +52,8 @@
         </div>
         <?php } else { ?>
         <div>
-          <h3><?= ($error != false) ? $error: "Sửa thành công sản phẩm"?> </h3>
+          <h3><?= ($error != false) ? $error: "Sửa thành công sản phẩm"?> 
+        </h3>
           <a href="./admin_sp.php"> >>Quay lại danh sách sản phẩm</a>
         </div>
         <?php }?>
@@ -75,7 +79,8 @@
             <div class="panel-body">
               <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped tablesorter">
-                  <form action="./edit_sp.php?action=edit" method="post">
+                  <form action="./edit_sp.php?action=edit" method="post" enctype="multipart/form-data">
+                  <input width="50px;" type="hidden" name="sanpham_id" value="<?= $sanpham['sanpham_id'] ?>" />
                     <div>
                       <label>Tên sản phẩm: </label><br>
                       <input type="text" name="sanpham_ten" value="<?= $sanpham['sanpham_ten']?>">
@@ -86,7 +91,7 @@
                       <div class="right-wrap-field">
                         <?php if (!empty($sanpham['sanpham_anh'])) { ?>
                         <img src="../<?= $sanpham['sanpham_anh'] ?>" /><br />
-                        <input width="50px;" type="hidden" name="sanpham_anh" value="<?= $sanpham['sanpham_anh'] ?>" />
+                        <input width="50px;" type="text" name="sanpham_anh" value="<?= $sanpham['sanpham_anh'] ?>" />
                         <br>
                         <?php } ?>
                         <input width="50px;" type="file" name="sanpham_anh" />

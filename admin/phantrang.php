@@ -1,6 +1,6 @@
 <?php
-    require("../config.php");
-    $limit = 12; 
+    require("./config.php");
+    $limit = 8; 
     $result_db = mysqli_query($conn,"SELECT COUNT(sanpham_id) FROM sanpham"); 
     $row_db = mysqli_fetch_row($result_db);  
     $total_records = $row_db[0];  

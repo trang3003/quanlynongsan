@@ -63,7 +63,7 @@
         <?php } else { ?>
         <div>
           <h1> Vui lòng nhập đủ thông tin để sửa tình trạng đơn hàng</h1>
-          <a href="./edit_lsp.php?tinhtrang_id=<?=$_POST['tinhtrang_id']?>"> Quay lại sửa tình trạng đơn hàng</a>
+          <a href="./edit_tinhtrangdh.php?tinhtrang_id=<?=$_POST['tinhtrang_id']?>"> Quay lại sửa tình trạng đơn hàng</a>
         </div>
         <?php }
         }else{

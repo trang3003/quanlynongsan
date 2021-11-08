@@ -26,7 +26,6 @@
     }
 ?>
 <?php  
- require("../config.php");
 $limit = 8;  
 if (isset($_GET["page"])) {
     $page  = $_GET["page"]; 
@@ -46,14 +45,6 @@ $products = mysqli_query($conn,"SELECT * FROM sanpham ORDER BY sanpham_ten ASC L
               <li class="active"><i class="fa fa-dashboard"></i> Hi admin, welcome to ...</li>
             </ol>
           </div>
-          <form action="" method="get">
-          <div class="col-lg-6 form-group input-group">
-                <input type="text" class="form-control" name="search" value="<?php if(isset($_GET['search'])){ echo $_GET['search'];}?>">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                </span>
-          </div>
-          </form>
           
         </div>
         <a href="./create_sp.php">Thêm sản phẩm mới</a>

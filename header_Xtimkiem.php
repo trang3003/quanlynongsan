@@ -12,9 +12,22 @@
             </ul>
         </div>
         <div class="humberger__menu__widget">
-            <div class="header__top__right__auth">
-                <a href="./dangnhap.php"><i class="fa fa-user"></i> Đăng Nhập</a>
-            </div>
+        <div class="header__top__right__auth">
+                    <?php
+                    if(isset($_SESSION['khachhang']['nguoidung_ten'])){
+                        $ten=$_SESSION['khachhang']['nguoidung_ten'];
+                    ?>
+                        <a href="./index.php"><i class="fa fa-user"></i><?php echo $ten; ?></a>
+                    <?php
+                    }else{
+                    ?>
+                        <a href="./dangnhap.php"><i class="fa fa-user"></i>Đăng nhập</a>
+                    <?php 
+                    }
+                    ?>  
+                    
+                    <a href="./dangxuat.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a>
+                </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -57,9 +70,22 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="header__top__right">
-                            <div class="header__top__right__auth">
-                                <a href="./dangnhap.php"><i class="fa fa-user"></i> Đăng Nhập</a>
-                            </div>
+                        <div class="header__top__right__auth">
+                    <?php
+                    if(isset($_SESSION['khachhang']['nguoidung_ten'])){
+                        $ten=$_SESSION['khachhang']['nguoidung_ten'];
+                    ?>
+                        <a href="./index.php"><i class="fa fa-user"></i><?php echo $ten; ?></a>
+                    <?php
+                    }else{
+                    ?>
+                        <a href="./dangnhap.php"><i class="fa fa-user"></i>Đăng nhập</a>
+                    <?php 
+                    }
+                    ?>  
+                    
+                    <a href="./dangxuat.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a>
+                </div>
                         </div>
                     </div>
                 </div>

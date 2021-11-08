@@ -121,7 +121,7 @@
                                     <div class='featured__item__pic set-bg' data-setbg="<?=$row['sanpham_anh']?>">
                                         <ul class='featured__item__pic__hover'>
                                             <li><a href="chitietsp.php?sanpham_id=<?=$row['sanpham_id'];?>"><i class='fa fa-retweet'></i></a></li>
-                                            <li><a href="giohang.php?chitietdonhang_soluong[<?php echo $row['sanpham_id']; ?>]&action=add"><i class='fa fa-shopping-cart'></i></a></li>
+                                         <li><a href="giohang.php?chitietdonhang_soluong[<?php echo $row['sanpham_id']; ?>]&action=add"><i class='fa fa-shopping-cart'></i></a></li>
                                         </ul>
                                     </div>
                                     <div class='featured__item__text'>
